@@ -1,0 +1,101 @@
+﻿@model WebApplication2.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<style>
+    body {
+        background-color: #f5f5f5; /* Change the background color as needed */
+    }
+
+    .container {
+        margin-top: 50px; /* Adjust the top margin to center the UI vertically */
+    }
+
+    .card {
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #007bff; /* Change the header background color as needed */
+        color: #fff; /* Make the text white */
+        padding: 15px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-footer {
+        background-color: #f8f9fa; /* Change the footer background color as needed */
+        padding: 15px;
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Register</h2>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            @Html.LabelFor(Model => Model.Username)
+                            @Html.TextBoxFor(Model => Model.Username, new { @class = "form-control", required = "required" })
+                            <div class="invalid-feedback">Please enter your username.</div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(Model => Model.Password)
+                            @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", required = "required" })
+                            <div class="invalid-feedback">Please enter your password.</div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(Model => Model.ConfirmPassword)
+                            @Html.PasswordFor(Model => Model.ConfirmPassword, new { @class = "form-control", required = "required" })
+                            <div class="invalid-feedback">Please confirm your password.</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    }
+                </div>
+                <div class="card-footer text-center">
+                    <p>Already have an account? <a href="@Url.Action("Login", "Account")">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Client-side form validation using Bootstrap's built-in classes
+        (function () {
+            'use strict';
+
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+}

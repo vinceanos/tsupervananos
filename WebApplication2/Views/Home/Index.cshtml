@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="text-right mb-3">
+                    <a href="@Url.Action("SignOut", "Home")" class="btn btn-primary">Logout</a>
+                </div>
+            }
+            <div class="jumbotron">
+                <h1 class="display-5">Welcome to TsuperVan</h1>
+                <p class="lead">Explore exciting tours and rent vans for your adventures.</p>
+                <hr class="my-4">
+                <p class="lead">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="@Url.Action("Tours", "Tours")" class="btn btn-primary btn-lg">View Tours</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Login", "Account")" class="btn btn-primary btn-lg">Login</a>
+                    }
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="jumbotron">
+                    <h1 class="display-6">Rent a Van</h1>
+                    <p class="lead">Rent a van for your trip with ease.</p>
+                    <hr class="my-4">
+                    <p class="lead">
+                        <a href="@Url.Action("VanRentals", "Rentals")" class="btn btn-success btn-lg">Rent a Van</a>
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="jumbotron">
+                    <h1 class="display-6">Log in to Rent a Van</h1>
+                    <p class="lead">Please log in to rent a van for your trip.</p>
+                    <hr class="my-4">
+                    <p class="lead">
+                        <a href="@Url.Action("Login", "Account")" class="btn btn-primary btn-lg">Login</a>
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
